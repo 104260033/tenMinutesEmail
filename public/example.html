@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TenMinutesEmail</title>
+</head>
+<link rel="stylesheet" href="css/app.css">
+<body>
+
+<div id="app">
+<!--     {{ newName }}
+    <br>This is Input
+    <input id='testInput' type="text" v-model="newName" @keyUp='addName'>
+    <button id='button' @click='addName'>加入</button>
+    <example></example>
+
+    <ul>
+        <li v-for="item in items" v-text='item'></li>
+    </ul> -->
+    {{ title.split('').reverse().join() }}
+
+    {{ reversedTitle }}
+    <div v-text='new Date()'></div>
+    <div title='11' :class='{isLoading : isLoading}' >
+11
+    </div>
+
+    <div v-for="task in tasks" v-text='task.description' v-if="task.completed"></div>
+<ul>
+    <li v-for="task in incompleteTasks" v-text='task.description' ></li>
+</ul>
+
+    <button v-bind:title='title' v-on:click="toggleClass">toggle</button>
+    <p v-text='title'></p>
+</div>
+
+<script src='/js/app.js'></script>
+<script>
+const app = new Vue({
+    el: '#app',
+    data : {
+          isLoading: false,
+          newName: '',
+          title:' This is Title',
+        items: ['Joe','Mary','Jane','Jack'],
+        tasks: [
+            {description: 'Go',completed:true},
+            {description: 'Go Run',completed:false},
+            {description: 'Run',completed:true}
+        ]
+    },
+
+    methods: {
+        addName(){
+                this.items.push(this.newName);
+        },
+        toggleClass(){
+             this.isLoading = true;
+        }
+    },
+    watch:{
+        'isLoading' : function(oldData,newData){
+            console.log(oldData,newData);
+        }
+    },
+    computed:{
+            reversedTitle(){
+                 return this.title.split('').reverse().join('');
+            },
+            incompleteTasks(){
+                 return this.tasks.filter(task =>  task.completed);
+            }
+    },
+    mounted(){
+    //       document.querySelector('#button').addEventListener('click',
+    //     function(){
+    //     let name = document.querySelector('#testInput').value;
+    //     console.log(name);
+    //     app.items.push(name);
+    // });
+    }
+});
+
+</script>
+</body>
+</html>

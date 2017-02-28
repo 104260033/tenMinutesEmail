@@ -5,5 +5,24 @@
 // Variables
 @import "variables";
 
-// Bootstrap
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+//// Bootstrap
+//@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+
+
+//.content {
+//	background-color: white;
+//	padding: 3rem 1.5rem;
+//}
+
+.center-block {
+	margin-right:auto;
+	margin-left:auto;
+	width:30%;
+}
+.login-right-background {
+	background-image: url('https://drscdn.500px.org/photo/118771829/m%3D2048/420d2f6430f878b8a0db28195b1ff8a3');
+	background-size:100% 100%;
+	background-repeat:no-repeat;
+
+}
