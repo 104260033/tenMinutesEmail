@@ -28,6 +28,7 @@
     @section('footer')
         @include('.footer')
     @show
+
 </div>
 <script src='/js/app.js'></script>
 </body>
