@@ -13,12 +13,33 @@ require('./bootstrap');
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+class Errors {
+	construct(){
+		this.errors = {};
+	}
+	get(field){
+		if(this.errors[field]){
+			return this.errors[field];
+		}
+	}
+	record(errors){
+		this.errors = errors;
+	}
+}
 const app = new Vue({
 	el:'#app',
 	data : {
-
+		name: '',
+		description: '',
+		errors: new Errors,
 	},
 	methods:{
-
+		onSubmit(){
+			axios.post('/user/login',this.data)
+				.then(response => alert('Success'))
+				.catch(error => {
+					this.errors.record(error.response);
+				})
+		}
 	}
 });

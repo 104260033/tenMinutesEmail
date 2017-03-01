@@ -16,12 +16,7 @@
     @show
 
     {{--content--}}
-    <div class="content">
-
-                @yield('content')
-
-
-    </div>
+    @yield('content')
 
     {{--footer--}}
 
@@ -30,6 +25,8 @@
     @show
 
 </div>
-<script src='/js/app.js'></script>
+@verbatim
+<script src="/js/app.js"></script>
+@endverbatim
 </body>
 </html>

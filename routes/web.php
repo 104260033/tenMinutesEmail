@@ -17,4 +17,5 @@ Route::get('/',function() {
     return view('index.html');
 });
 
-Route::resource('user','UserController');
+Route::get('user/login','UserController@showLogin');
+Route::post('user/login','UserController@login');
