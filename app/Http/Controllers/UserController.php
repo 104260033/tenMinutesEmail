@@ -19,20 +19,16 @@ class UserController extends Controller
 
     }
 
-    public function login(Request $request)
+    public function login()
     {
         /**
          * 验证
          */
-        $validator = Validator::make($request->all(), [
+        $this->validate(request(),[
             'email'    => 'required',
             'password' => 'required',
         ]);
-        if ($validator->fails()) {
-            $firstError = current(current(current($validator->errors())));
-            $error = $firstError ?: 'Request Parameter error';
-            return $validator->errors();
-        }
+
     }
 
 }

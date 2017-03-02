@@ -11204,19 +11204,21 @@ __webpack_require__(30);
 var Errors = function () {
 	function Errors() {
 		_classCallCheck(this, Errors);
+
+		this.errors = {};
 	}
 
 	_createClass(Errors, [{
-		key: 'construct',
-		value: function construct() {
-			this.errors = {};
-		}
-	}, {
 		key: 'get',
 		value: function get(field) {
 			if (this.errors[field]) {
-				return this.errors[field];
+				return this.errors[field][0];
 			}
+		}
+	}, {
+		key: 'clear',
+		value: function clear(field) {
+			delete this.errors[field];
 		}
 	}, {
 		key: 'record',
@@ -11228,11 +11230,23 @@ var Errors = function () {
 	return Errors;
 }();
 
+var Form = function Form(data) {
+	_classCallCheck(this, Form);
+
+	this.data = data;
+
+	for (var field in data) {
+		this[field] = data[field];
+	}
+};
+
 var app = new Vue({
 	el: '#app',
 	data: {
-		name: '',
-		description: '',
+		form: new Form({
+			email: '',
+			password: ''
+		}),
 		errors: new Errors()
 	},
 	methods: {
@@ -11240,11 +11254,12 @@ var app = new Vue({
 			var _this = this;
 
 			axios.post('/user/login', this.data).then(function (response) {
-				return alert('Success');
+				return onSuccess();
 			}).catch(function (error) {
-				_this.errors.record(error.response);
+				_this.errors.record(error.response.data);
 			});
-		}
+		},
+		onSuccess: function onSuccess() {}
 	}
 });
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(1)))

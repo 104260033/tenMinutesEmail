@@ -14,32 +14,50 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 class Errors {
-	construct(){
+	constructor(){
 		this.errors = {};
 	}
 	get(field){
 		if(this.errors[field]){
-			return this.errors[field];
+			return this.errors[field][0];
 		}
+	}
+	clear(field){
+		delete this.errors[field];
 	}
 	record(errors){
 		this.errors = errors;
 	}
 }
+class Form {
+	constructor(data){
+		this.data = data;
+
+		for (let field in data ){
+			this[field] = data[field];
+		}
+	}
+
+}
 const app = new Vue({
 	el:'#app',
 	data : {
-		name: '',
-		description: '',
-		errors: new Errors,
+		form: new Form({
+			email: '',
+			password: '',
+		}),
+		errors: new Errors()
 	},
 	methods:{
 		onSubmit(){
 			axios.post('/user/login',this.data)
-				.then(response => alert('Success'))
+				.then(response => onSuccess())
 				.catch(error => {
-					this.errors.record(error.response);
+					this.errors.record(error.response.data);
 				})
+		},
+		onSuccess(){
+
 		}
 	}
 });
